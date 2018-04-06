@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding  text-center>
+  
+      <img src="../../assets/imgs/logo_dial.png" height="90" />
+
+
+  <form (ngSubmit)="login()" name="myForm">
+
+    
+     
+    
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="formData.email" name="email" value="sazzadh88@gmail.com" clearInput="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="formData.password" value="sazzad" name="password" clearInput="true"></ion-input>
+
+      <br>
+      <label ng-show="myForm.name.$invalid"> Check Fields</label>
+      <br>
+    </ion-item>
+    <p text-right>
+      <button ion-button clear color="secondary" ng-disabled="myForm.$invalid" type="button" (click)="goToForgotPass()">Forgot password</button>
+    </p>
+
+    <button ion-button block color="secondary" type="submit">Login</button>
+    <button ion-button block type="button"  color="secondary" outline (click)="goToRegister()">Register</button>
+  </form>
+
+</ion-content>
