@@ -71,7 +71,7 @@ export class RegisterPage {
 
   showLoader(){
     this.loading = this.loadingCtrl.create({
-        content: 'Authenticating...'
+        content: 'Creating account...'
     });
 
     this.loading.present();
@@ -82,7 +82,8 @@ export class RegisterPage {
       message: msg,
       duration: 3000,
       position: 'bottom',
-      dismissOnPageChange: true
+      dismissOnPageChange: false,
+
     });
 
     toast.onDidDismiss(() => {

@@ -32,6 +32,23 @@ export class AuthServiceProvider {
           });
     });
   }
+
+  logout(token){
+    return new Promise((resolve, reject) => {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+
+        this.http.post(apiUrl+'logout',token, {headers: headers})
+          .subscribe(res => {
+            resolve(res.json());
+            
+          }, (err) => {
+            reject(err.json());
+           
+          });
+    });
+  }
   register(credentials) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();

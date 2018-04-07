@@ -29,6 +29,8 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+    console.log(this.navParams.get('message'));
+   this.presentToast(this.navParams.get('message'));
   }
 
 
@@ -71,9 +73,9 @@ export class LoginPage {
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 4000,
+      duration: 3000,
       position: 'bottom',
-      dismissOnPageChange: true
+      dismissOnPageChange: false
     });
 
     toast.onDidDismiss(() => {

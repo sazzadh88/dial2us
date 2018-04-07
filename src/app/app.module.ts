@@ -2,11 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { BillPage } from '../pages/bill/bill';
 import { HttpModule } from '@angular/http';
 
 
@@ -26,7 +28,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     LoginPage,
     RegisterPage,
-    ForgotPassPage
+    ForgotPassPage,
+    BillPage
   ],
   imports: [
     BrowserModule,
@@ -42,11 +45,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     LoginPage,
     RegisterPage,
-    ForgotPassPage
+    ForgotPassPage,
+    BillPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

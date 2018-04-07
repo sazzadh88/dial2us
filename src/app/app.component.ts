@@ -7,14 +7,20 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { LoginPage } from '../pages/login/login';
+import { BillPage } from '../pages/bill/bill';
+import { ListPage } from '../pages/list/list';
 
 
 @Component({
   templateUrl: 'app.html',
   providers: [AuthServiceProvider]
 })
+
+
+
+
 export class MyApp {
   [x: string]: any;
   @ViewChild(Nav) nav: Nav;
@@ -26,7 +32,7 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public authService: AuthServiceProvider) {
     this.initializeApp();
     
-
+ 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
@@ -40,9 +46,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
-      let token = localStorage.getItem('token');
-      console.log(token);
+let token = localStorage.getItem('token');
+      
       if(token != '' && token != null){
         this.authService.checkToken(token).then((result) => {
           this.nav.setRoot(HomePage);
@@ -62,7 +67,27 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    console.log(page);
+   
     this.nav.setRoot(page.component);
+  }
+
+  navLogout(){
+      let token = localStorage.getItem('token');
+    this.authService.logout({'token': token}).then((result) => {
+      if(result.message){
+        localStorage.removeItem('token');
+        this.nav.setRoot(LoginPage,{message: "Logged Out"});
+      }else{
+        localStorage.removeItem('token');
+        this.nav.setRoot(LoginPage,{message: "Logged Out"});
+      }
+    }, (err) => {
+      console.log("Error ->");
+      console.log(err);
+    });
+  }
+
+  navBill(){
+    this.nav.push(BillPage);
   }
 }
