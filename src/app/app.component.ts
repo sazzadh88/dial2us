@@ -52,6 +52,7 @@ export class MyApp {
         });
       }else{
         console.log('not found');
+        this.nav.setRoot(LoginPage);
       }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -63,8 +64,5 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     console.log(page);
     this.nav.setRoot(page.component);
-
   }
-
-  
 }

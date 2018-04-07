@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
   and Angular DI.
 */
 
-let apiUrl = 'https://app.web/api/';
+let apiUrl = 'http://localhost:8000/api/';
 
 
 @Injectable()
