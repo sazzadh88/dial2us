@@ -4,6 +4,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 import { RegisterPage } from '../register/register';
 import { ForgotPassPage } from '../forgot-pass/forgot-pass';
+import { HomePage } from '../home/home';
 
 @Component({
   selector:    'page-login',
@@ -23,7 +24,8 @@ export class LoginPage {
     public authService: AuthServiceProvider
   ) {
     this.formData = { };
-    
+    this.formData.email = 'sazzad@myemail.com';
+    this.formData.password = 'sazzad';
   }
 
   ionViewDidLoad() {
@@ -46,11 +48,11 @@ export class LoginPage {
         this.loading.dismiss();
         this.data = result;
         this.presentToast("Login Successful");
-        // localStorage.setItem('token', this.data.access_token);
-        console.log(result);
+        localStorage.setItem('token', this.data.access_token);
+
+        this.navCtrl.setRoot(HomePage);
       }, (err) => {
         this.loading.dismiss();
-        // this.presentToast(err);
         this.presentToast("Login Failed");
       });
     }
@@ -69,7 +71,7 @@ export class LoginPage {
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 3000,
+      duration: 4000,
       position: 'bottom',
       dismissOnPageChange: true
     });

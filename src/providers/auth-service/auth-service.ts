@@ -41,11 +41,26 @@ export class AuthServiceProvider {
         this.http.post(apiUrl+'register', JSON.stringify(credentials), {headers: headers})
           .subscribe(res => {
             resolve(res.json());
-            // this.isLoggedIn = true;
+            
           }, (err) => {
-            reject(err);
+            reject(err.json());
+           
           });
     });
+  }
+
+  checkToken(token){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+      this.http.get(apiUrl+'me?token='+token , {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err.json());
+        });
+  });
   }
 
 }

@@ -26,6 +26,9 @@ export class RegisterPage {
         public authService: AuthServiceProvider
     ) {
     this.formData = {};
+    this.formData.name='Sazzad';
+    this.formData.password='sazzad';
+    this.formData.email='sazzad@myemail.com';
   }
 
   ionViewDidLoad() {
@@ -53,14 +56,13 @@ export class RegisterPage {
       this.authService.register(this.formData).then((result) => {
         this.loading.dismiss();
         this.data = result;
-       console.log("Success:" + result);
+       console.log("Success:" + this.data);
         this.presentToast("Registration Successful");
         this.navCtrl.push(LoginPage);
       }, (err) => {
         this.loading.dismiss();
-        // this.presentToast(err);
-        console.log("Error: " + err);
-        this.presentToast("Registration Failed :(");
+        this.data = err;
+        this.presentToast(this.data.errors.email[0]);
       });
     }
     
@@ -84,7 +86,6 @@ export class RegisterPage {
     });
 
     toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
     });
 
     toast.present();
