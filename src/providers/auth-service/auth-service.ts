@@ -8,14 +8,13 @@ import 'rxjs/add/operator/map';
   and Angular DI.
 */
 
-let apiUrl = 'http://localhost:8000/api/';
+let apiUrl = 'https://app.web/api/';
 
 
 @Injectable()
 export class AuthServiceProvider {
 
   constructor(public http: Http) {
-    // console.log('Hello AuthServiceProvider Provider');
   }
 
   login(credentials) {
@@ -31,6 +30,42 @@ export class AuthServiceProvider {
             reject(err);
           });
     });
+  }
+
+  getUserBill(data, token){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+      headers.append('Authorization', 'Bearer '+ token);
+
+     
+
+      this.http.post(apiUrl+'bills', { 'user_id' : data }, {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err.json());
+        });
+  });
+  }
+//get bill details from bill id
+  loadBillDetails(bill_id,token){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+      headers.append('Authorization', 'Bearer '+ token);
+
+     
+
+      this.http.post(apiUrl+'billdetails', { 'bill_id' : bill_id }, {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err.json());
+        });
+  });
   }
 
   logout(token){

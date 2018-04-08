@@ -25678,6 +25678,10 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-bill ion-item.item:hover {
+  background-color: #f1f1f1;
+}
+
 page-login .item-md.item-input .item-inner {
   border-bottom-color: #49BB00 !important;
 }

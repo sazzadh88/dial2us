@@ -24,13 +24,13 @@ export class LoginPage {
     public authService: AuthServiceProvider
   ) {
     this.formData = { };
-    this.formData.email = 'sazzad@myemail.com';
+    this.formData.email = 'sazzadh88@gmail.com';
     this.formData.password = 'sazzad';
   }
 
   ionViewDidLoad() {
-    console.log(this.navParams.get('message'));
    this.presentToast(this.navParams.get('message'));
+   
   }
 
 
@@ -47,11 +47,13 @@ export class LoginPage {
       this.showLoader();
 
       this.authService.login(this.formData).then((result) => {
-        this.loading.dismiss();
+        
         this.data = result;
+       
         this.presentToast("Login Successful");
         localStorage.setItem('token', this.data.access_token);
-
+        localStorage.setItem('user', JSON.stringify(this.data.user));
+        this.loading.dismiss();
         this.navCtrl.setRoot(HomePage);
       }, (err) => {
         this.loading.dismiss();

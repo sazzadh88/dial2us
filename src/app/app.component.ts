@@ -8,9 +8,9 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { LoginPage } from '../pages/login/login';
 import { BillPage } from '../pages/bill/bill';
 import { ListPage } from '../pages/list/list';
+import { ComplaintListPage } from '../pages/complaint-list/complaint-list';
 
 
 @Component({
@@ -73,14 +73,10 @@ let token = localStorage.getItem('token');
 
   navLogout(){
       let token = localStorage.getItem('token');
-    this.authService.logout({'token': token}).then((result) => {
-      if(result.message){
+      this.authService.logout({'token': token}).then((result) => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         this.nav.setRoot(LoginPage,{message: "Logged Out"});
-      }else{
-        localStorage.removeItem('token');
-        this.nav.setRoot(LoginPage,{message: "Logged Out"});
-      }
     }, (err) => {
       console.log("Error ->");
       console.log(err);
@@ -89,5 +85,10 @@ let token = localStorage.getItem('token');
 
   navBill(){
     this.nav.push(BillPage);
+  }
+
+  navComplaint(){
+    console.log('called');
+    this.nav.push(ComplaintListPage);
   }
 }

@@ -1,22 +1,35 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Network } from '@ionic-native/network';
+import { NavController, LoadingController } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [Network]
 })
 export class HomePage {
   token = '';
+  loading:any;
+  username:string;
+  userid:number;
 
-  constructor(public navCtrl: NavController, private network: Network) {
+
+  constructor(public navCtrl: NavController) {
 
   }
 
   ionViewDidLoad() {
+  
     let access_token = localStorage.getItem('token');
     this.token = access_token;
+    
+    let userData = JSON.parse(localStorage.getItem('user'));
+    this.username =  userData.name;
+    this.userid =  userData.id;
+
+    
+    
   }
+
+
 
 }
