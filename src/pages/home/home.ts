@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 
 @Component({
@@ -23,6 +23,8 @@ export class HomePage {
     this.token = access_token;
     
     let userData = JSON.parse(localStorage.getItem('user'));
+    console.log(userData);
+
     this.username =  userData.name;
     this.userid =  userData.id;
 

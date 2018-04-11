@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { LoginPage } from '../login/login';
-import { BillDetailsPage } from '../bill-details/bill-details';
+
 
 /**
  * Generated class for the BillPage page.
@@ -15,7 +15,7 @@ import { BillDetailsPage } from '../bill-details/bill-details';
 @Component({
   selector: 'page-bill',
   templateUrl: 'bill.html',
-  providers: [AuthServiceProvider]
+  providers: [ AuthServiceProvider ]
 })
 export class BillPage {
   bills:any;
@@ -49,9 +49,7 @@ export class BillPage {
     });
   }
   openBill(billid){
-    this.navCtrl.push(BillDetailsPage,{
-      'bill_id':billid
-    })
+    
   }
 
   showLoader(){

@@ -1,14 +1,14 @@
 webpackJsonp([1],{
 
-/***/ 415:
+/***/ 292:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComplaintListPageModule", function() { return ComplaintListPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComplaintPageModule", function() { return RegisterComplaintPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complaint_list__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_complaint__ = __webpack_require__(207);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ComplaintListPageModule = /** @class */ (function () {
-    function ComplaintListPageModule() {
+var RegisterComplaintPageModule = /** @class */ (function () {
+    function RegisterComplaintPageModule() {
     }
-    ComplaintListPageModule = __decorate([
+    RegisterComplaintPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__complaint_list__["a" /* ComplaintListPage */],
+                __WEBPACK_IMPORTED_MODULE_2__register_complaint__["a" /* RegisterComplaintPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__complaint_list__["a" /* ComplaintListPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__register_complaint__["a" /* RegisterComplaintPage */]),
             ],
         })
-    ], ComplaintListPageModule);
-    return ComplaintListPageModule;
+    ], RegisterComplaintPageModule);
+    return RegisterComplaintPageModule;
 }());
 
-//# sourceMappingURL=complaint-list.module.js.map
+//# sourceMappingURL=register-complaint.module.js.map
 
 /***/ })
 

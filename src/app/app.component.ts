@@ -13,6 +13,7 @@ import { ListPage } from '../pages/list/list';
 import { ComplaintListPage } from '../pages/complaint-list/complaint-list';
 
 
+
 @Component({
   templateUrl: 'app.html',
   providers: [AuthServiceProvider]
@@ -25,7 +26,7 @@ export class MyApp {
   [x: string]: any;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any;
 
   pages: Array<{title: string, component: any}>;
 
@@ -46,21 +47,25 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-let token = localStorage.getItem('token');
+      
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      let token = localStorage.getItem('token');
       
       if(token != '' && token != null){
         this.authService.checkToken(token).then((result) => {
-          this.nav.setRoot(HomePage);
+          console.log(result);
+          this.rootPage = HomePage;
         }, (err) => {
           console.log("not found");
-          this.nav.setRoot(LoginPage);
+          // this.nav.setRoot(LoginPage);
+          this.rootPage = LoginPage;
         });
       }else{
-        console.log('not found');
-        this.nav.setRoot(LoginPage);
+        // console.log('not found');
+        // this.nav.setRoot(LoginPage);
+        this.rootPage = LoginPage;
       }
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
     });
   }
 
