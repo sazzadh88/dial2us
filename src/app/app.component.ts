@@ -9,7 +9,6 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { BillPage } from '../pages/bill/bill';
-import { ListPage } from '../pages/list/list';
 import { ComplaintListPage } from '../pages/complaint-list/complaint-list';
 
 
@@ -28,19 +27,10 @@ export class MyApp {
 
   rootPage: any;
 
-  pages: Array<{title: string, component: any}>;
+
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public authService: AuthServiceProvider) {
     this.initializeApp();
-    
- 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Test', component: ListPage }
-    ];
-
   }
 
   initializeApp() {

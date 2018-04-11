@@ -4,7 +4,7 @@ import { RegisterComplaintPage } from './register-complaint';
 
 @NgModule({
   declarations: [
-    RegisterComplaintPage,
+   
   ],
   imports: [
     IonicPageModule.forChild(RegisterComplaintPage),

@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-
-
-/**
- * Generated class for the BillPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 
@@ -20,8 +13,8 @@ import { LoginPage } from '../login/login';
 })
 
 export class BillPage {
+  
   bills:any;
-
   loading:any;
   user_id:any;
 

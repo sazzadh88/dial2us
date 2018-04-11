@@ -34,11 +34,11 @@ import { ComplaintDetailsPage } from '../pages/complaint-details/complaint-detai
     ListPage,
     RegisterPage,
     ForgotPassPage,
-    BillPage,
     BillDetailsPage,
     ComplaintListPage,
     RegisterComplaintPage,
-    ComplaintDetailsPage
+    ComplaintDetailsPage,
+    BillPage
   ],
   imports: [
     BrowserModule,
@@ -55,11 +55,11 @@ import { ComplaintDetailsPage } from '../pages/complaint-details/complaint-detai
     LoginPage,
     RegisterPage,
     ForgotPassPage,
-    BillPage,
     BillDetailsPage,
     ComplaintListPage,
     RegisterComplaintPage,
-    ComplaintDetailsPage
+    ComplaintDetailsPage,
+    BillPage
 
   ],
   providers: [
