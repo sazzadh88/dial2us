@@ -12,11 +12,13 @@ import { LoginPage } from '../login/login';
  */
 
 @IonicPage()
+
 @Component({
   selector: 'page-bill',
   templateUrl: 'bill.html',
   providers: [ AuthServiceProvider ]
 })
+
 export class BillPage {
   bills:any;
 

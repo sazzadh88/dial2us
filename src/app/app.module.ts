@@ -13,8 +13,9 @@ import { HttpClientModule} from '@angular/common/http';
 
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { BillPage } from '../pages/bill/bill';
+import { ListPage } from '../pages/list/list';
+
 import { RegisterPage } from '../pages/register/register';
 import { ForgotPassPage } from '../pages/forgot-pass/forgot-pass';
 import { BillDetailsPage } from '../pages/bill-details/bill-details';

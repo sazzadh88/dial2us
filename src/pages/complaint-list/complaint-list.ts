@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, NavController, LoadingController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the ComplaintListPage page.
@@ -40,8 +41,16 @@ export class ComplaintListPage {
     this.loading.present();
   }
 
-  loadComplaints(this.user_id, token){
-
+  loadComplaints(user_id, token){
+    this.authService.loadComplaints(user_id, token).then((result) => {
+      this.complaintList = result;
+  
+      this.loading.dismiss();
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+      this.loading.dismiss();
+      
+    });
   }
 
 }

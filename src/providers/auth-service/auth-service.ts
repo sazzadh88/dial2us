@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
   and Angular DI.
 */
 
-let apiUrl = 'https://app.web/api/';
+let apiUrl = 'http://127.0.0.1:8000/api/';
 
 
 @Injectable()
@@ -17,11 +17,26 @@ export class AuthServiceProvider {
   constructor(public http: Http) {
   }
 
+  loadComplaints(user_id, token){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', 'Bearer '+ token);
+      this.http.post(apiUrl+'complaints',  { 'user_id' : user_id } , {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+          // this.isLoggedIn = true;
+        }, (err) => {
+          reject(err);
+        });
+  });
+  }
+
   login(credentials) {
     return new Promise((resolve, reject) => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-
+        
         this.http.post(apiUrl+'login', JSON.stringify(credentials), {headers: headers})
           .subscribe(res => {
             resolve(res.json());

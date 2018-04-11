@@ -8,9 +8,21 @@
 
 
 <ion-content padding>
-    <ion-item>
-        <ion-label color="secondary" floating>Type Complaint Here</ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item>
-  
+    <ion-item *ngIf="complaintList == []">
+      <h3>Nothing found</h3>
+    </ion-item>
+   <ion-list *ngIf="complaintList != []" >
+    <ion-item *ngFor="let complaint of complaintList" >
+
+          <ion-avatar item-start>
+              <img src="assets/imgs/pay.png">
+                  
+            </ion-avatar>
+            <h3 >Date: {{ complaint.id }} </h3>
+           
+            <p>₹ {{complaint.user_id}}</p>
+            <button ion-button clear item-end>Pay</button>
+      
+    </ion-item>
+  </ion-list>
 </ion-content>
