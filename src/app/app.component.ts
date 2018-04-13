@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform ,LoadingController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
@@ -26,10 +26,10 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any;
+  loading:any;
 
 
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public authService: AuthServiceProvider) {
+  constructor(public loadingCtrl:LoadingController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public authService: AuthServiceProvider) {
     this.initializeApp();
   }
 
@@ -37,14 +37,10 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
       let token = localStorage.getItem('token');
       
       if(token != '' && token != null){
         this.authService.checkToken(token).then((result) => {
-          console.log(result);
           this.rootPage = HomePage;
         }, (err) => {
           console.log("not found");
@@ -56,6 +52,10 @@ export class MyApp {
         // this.nav.setRoot(LoginPage);
         this.rootPage = LoginPage;
       }
+      this.statusBar.styleBlackTranslucent();
+      // this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      
     });
   }
 
@@ -67,10 +67,12 @@ export class MyApp {
   }
 
   navLogout(){
+    this.showLoader();
       let token = localStorage.getItem('token');
       this.authService.logout({'token': token}).then((result) => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        this.loading.dismiss();
         this.nav.setRoot(LoginPage,{message: "Logged Out"});
     }, (err) => {
       console.log("Error ->");
@@ -83,7 +85,14 @@ export class MyApp {
   }
 
   navComplaint(){
-    console.log('called');
     this.nav.push(ComplaintListPage);
+  }
+
+  showLoader(){
+    this.loading = this.loadingCtrl.create({
+        content: 'Logging you out...'
+    });
+
+    this.loading.present();
   }
 }

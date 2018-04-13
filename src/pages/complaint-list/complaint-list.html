@@ -7,22 +7,38 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-item *ngIf="complaintList == []">
-      <h3>Nothing found</h3>
-    </ion-item>
-   <ion-list *ngIf="complaintList != []" >
-    <ion-item *ngFor="let complaint of complaintList" >
+<ion-content>
+  
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+<ion-label *ngIf="complaintList?.length == 0" color="danger" padding>Nothing found</ion-label>
+
+
+ 
+   <ion-list *ngIf="complaintList?.length >= 1">
+    <ion-item *ngFor="let complaint of complaintList" (click)='complaintDetails(complaint.id)' >
 
           <ion-avatar item-start>
-              <img src="assets/imgs/pay.png">
+              <img src="assets/imgs/email.png">
                   
             </ion-avatar>
-            <h3 >Date: {{ complaint.id }} </h3>
+            <h3 >Complaint ID : {{ complaint.id }} </h3>
            
-            <p>₹ {{complaint.user_id}}</p>
-            <button ion-button clear item-end>Pay</button>
+            <p>Date: {{complaint.created_at | date: 'dd-MM-yyyy'}}</p>
+            <p><small>Status: {{complaint.status }}</small></p>
       
     </ion-item>
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="openAddComplaint()">
+      <ion-icon name="camera"></ion-icon></button>
+    </ion-fab>
 </ion-content>

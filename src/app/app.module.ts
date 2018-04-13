@@ -23,6 +23,7 @@ import { BillDetailsPage } from '../pages/bill-details/bill-details';
 import { ComplaintListPage } from '../pages/complaint-list/complaint-list';
 import { RegisterComplaintPage } from '../pages/register-complaint/register-complaint';
 import { ComplaintDetailsPage } from '../pages/complaint-details/complaint-details';
+import { AddComplaintPage } from '../pages/add-complaint/add-complaint';
 
 // import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
@@ -38,7 +39,8 @@ import { ComplaintDetailsPage } from '../pages/complaint-details/complaint-detai
     ComplaintListPage,
     RegisterComplaintPage,
     ComplaintDetailsPage,
-    BillPage
+    BillPage,
+    AddComplaintPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import { ComplaintDetailsPage } from '../pages/complaint-details/complaint-detai
     ComplaintListPage,
     RegisterComplaintPage,
     ComplaintDetailsPage,
-    BillPage
+    BillPage,
+    AddComplaintPage
 
   ],
   providers: [

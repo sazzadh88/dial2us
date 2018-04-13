@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
+  providers: [Network]
 })
 export class HomePage {
   token = '';
@@ -13,25 +15,38 @@ export class HomePage {
   userid:number;
 
 
-  constructor(public navCtrl: NavController) {
+  constructor(private network: Network, public navCtrl: NavController) {
 
   }
 
   ionViewDidLoad() {
-  
     let access_token = localStorage.getItem('token');
     this.token = access_token;
-    
     let userData = JSON.parse(localStorage.getItem('user'));
-    console.log(userData);
-
     this.username =  userData.name;
-    this.userid =  userData.id;
-
-    
-    
+    this.userid =  userData.id; 
+    this.check(); 
   }
 
+  
+  check(){
+
+    console.log("Network Called");
+    let connectSubscription = this.network.onConnect().subscribe(() => {
+      console.log(this.network.type);
+      // We just got a connection but we need to wait briefly
+       // before we determine the connection type. Might need to wait.
+      // prior to doing any api requests as well.
+      setTimeout(() => {
+        if (this.network.type === 'wifi') {
+          console.log('we got a wifi connection, woohoo!');
+        }
+      }, 3000);
+    });
+    
+    // stop connect watch
+    connectSubscription.unsubscribe();
+  }
 
 
 }

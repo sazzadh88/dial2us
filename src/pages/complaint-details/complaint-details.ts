@@ -14,12 +14,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'complaint-details.html',
 })
 export class ComplaintDetailsPage {
-
+  complaint_id:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ComplaintDetailsPage');
+   this.complaint_id = this.navParams.get('complaint_id');
+   if(this.complaint_id == undefined || this.complaint_id == null || this.complaint_id == ''){
+    console.log("Empty Cid");
+   }else{
+     console.log("Complaint Id " + this.complaint_id);
+   }
   }
 
 }
