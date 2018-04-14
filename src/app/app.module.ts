@@ -24,6 +24,7 @@ import { ComplaintListPage } from '../pages/complaint-list/complaint-list';
 import { RegisterComplaintPage } from '../pages/register-complaint/register-complaint';
 import { ComplaintDetailsPage } from '../pages/complaint-details/complaint-details';
 import { AddComplaintPage } from '../pages/add-complaint/add-complaint';
+import { RestServiceProvider } from '../providers/rest-service/rest-service';
 
 // import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
@@ -69,6 +70,7 @@ import { AddComplaintPage } from '../pages/add-complaint/add-complaint';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    RestServiceProvider,
   ]
 })
 export class AppModule {}

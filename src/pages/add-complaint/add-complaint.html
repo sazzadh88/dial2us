@@ -23,7 +23,16 @@
       </button>
    
   </ion-row>
-  <ion-row></ion-row>
-    <img [hidden]="!base64Image" [src]='base64Image' >
+  <ion-row>
+    <ion-card  [hidden]="!base64Image">
+        <img [src]='base64Image' >
+    </ion-card>
+    
+  </ion-row>
+
+  <ion-row>
+      <button ion-button color="secondary" (click)="uploadImage()">
+          <ion-icon name="cloud-upload" md="md-cloud-upload"></ion-icon>
+        </button>
   </ion-row>
 </ion-content>
