@@ -7,14 +7,14 @@
 <ion-header>
 
   <ion-navbar color="secondary">
-    <ion-title>Register Complaint</ion-title>
+    <ion-title>Register Complaints</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <button ion-button full  (click)="takePic()">
+  <button ion-button full  (click)="takePic()" color="secondary">
     <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
   </button>
 
@@ -22,10 +22,14 @@
       <ion-row>
         <ion-col col-6 *ngFor="let photo of photos; let id = index">
           <ion-card class="block">
-            <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+            <ion-icon name="trash" class="deleteIcon" color="danger" (click)="deletePhoto(id)"></ion-icon>
             <img [src]="photo" *ngIf="photo" />
           </ion-card>
   </ion-col>
       </ion-row>
     </ion-grid>
+
+    <button ion-button full  (click)="uploadImage()" color="secondary" [hidden]="photos?.length == 0">
+      <ion-icon name="cloud-upload"></ion-icon>&nbsp;Upload
+    </button>
 </ion-content>

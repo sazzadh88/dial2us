@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { RestServiceProvider } from '../../providers/rest-service/rest-service';
+import { ComplaintListPage } from '../complaint-list/complaint-list';
+
 
 
 @IonicPage()
@@ -22,7 +24,7 @@ export class AddComplaintPage {
   public responseData: any;
 
 
-  constructor(public alertCtrl:AlertController,public loadingCtrl:LoadingController, private restService: RestServiceProvider, private camera: Camera, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public toastCtrl:ToastController, public alertCtrl:AlertController,public loadingCtrl:LoadingController, private restService: RestServiceProvider, private camera: Camera, public navCtrl: NavController, public navParams: NavParams) {
    
 
   }
@@ -88,14 +90,36 @@ export class AddComplaintPage {
   }
 
   uploadImage(){
+    this._log("upload image called");
     this.showLoader();
-    this.restService.uploadImageComplaint(this.base64Image,this.userid,this.token).then((result) => {
+    this.restService.uploadImageComplaint(this.photos,this.userid,this.token).then((result) => {
+      
       this.loading.dismiss();
-
+      this.presentToast("Complaint has been registered");
+      this.navCtrl.push(ComplaintListPage);
+      // this._log("Success ->" + JSON.stringify(result));
     }, (err) => {
+      // this._log("Error ->" + JSON.stringify(err));
+      this.presentToast("Error! Please try again.");
+      this.navCtrl.push(ComplaintListPage);
       this.loading.dismiss();
       
     });
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: false
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
   showLoader(){
@@ -107,6 +131,9 @@ export class AddComplaintPage {
   }
 
 
+  _log(e){
+    console.log(e);
+  }
 
 
 }

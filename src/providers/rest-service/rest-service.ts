@@ -22,7 +22,7 @@ export class RestServiceProvider {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', 'Bearer '+ token);
-      this.http.post(apiUrl+'complaints_add_img',  { 'user_id' : user_id , 'img' : imgData  } , {headers: headers})
+      this.http.post(apiUrl+'upload',  { 'user_id' : user_id , 'img' : imgData  } , {headers: headers})
         .subscribe(res => {
           resolve(res.json());
         }, (err) => {
