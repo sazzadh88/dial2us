@@ -52,8 +52,8 @@ export class MyApp {
         // this.nav.setRoot(LoginPage);
         this.rootPage = LoginPage;
       }
-      this.statusBar.styleBlackTranslucent();
-      // this.statusBar.styleDefault();
+      // this.statusBar.styleBlackTranslucent();
+      this.statusBar.styleDefault();
       this.splashScreen.hide();
       
     });

@@ -30,6 +30,20 @@ export class RestServiceProvider {
   });
   }
 
+  deleteComplaint(complaint_id,token){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', 'Bearer '+ token);
+      this.http.post(apiUrl+'complaintdelete',{'complaint_id':complaint_id}, {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+  });
+  }
+
 
   uploadImageComplaint(imgData, user_id, token){
     return new Promise((resolve, reject) => {

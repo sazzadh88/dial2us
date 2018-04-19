@@ -94,4 +94,7 @@ export class ComplaintListPage {
 
     toast.present();
   }
+  navToAddComplaint(){
+    this.navCtrl.push(AddComplaintPage);
+  }
 }

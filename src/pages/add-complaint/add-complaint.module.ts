@@ -4,7 +4,6 @@ import { AddComplaintPage } from './add-complaint';
 
 @NgModule({
   declarations: [
-    AddComplaintPage,
   ],
   imports: [
     IonicPageModule.forChild(AddComplaintPage),

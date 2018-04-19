@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { RestServiceProvider } from '../../providers/rest-service/rest-service';
+import { ComplaintListPage } from '../complaint-list/complaint-list';
 
 /**
  * Generated class for the ComplaintDetailsPage page.
@@ -22,22 +23,22 @@ export class ComplaintDetailsPage {
   token:any;
   data:any;
   imgs:any;
-  constructor(private restAPI:RestServiceProvider, public toastCtrl:ToastController, public loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl:AlertController,private restAPI:RestServiceProvider, public toastCtrl:ToastController, public loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
   this.imgs = [];
   }
 
   ionViewDidLoad() {
-    console.log("ionviewdidLoad called");
-   this.loading.dismiss();
+   
   }
   ngOnInit(){
+    // this.showLoader("Loading...");
     console.log("NgOnIt Called");
     this.token = localStorage.getItem('token');
     this.complaint_id = this.navParams.get('complaint_id');
    if(this.complaint_id == undefined || this.complaint_id == null || this.complaint_id == ''){
     this.presentToast("Please check complaint ID");
    }else{
-    this.showLoader();
+    this.showLoader("Loading...");
     this.restAPI.loadComplaintDetails(this.complaint_id,this.token).then((result) => {
         this.data = result;
         this.imgs = this.data.imgs;
@@ -49,10 +50,11 @@ export class ComplaintDetailsPage {
     });
     
    }
+   this.loading.dismiss();
   }
-  showLoader(){
+  showLoader(msg){
     this.loading = this.loadingCtrl.create({
-        content: 'Loading...'
+        content: msg
     });
 
     this.loading.present();
@@ -74,7 +76,46 @@ export class ComplaintDetailsPage {
   }
 
   
+  askDelete(complaint_id){
+    console.log("Ask dele called");
+    let alert = this.alertCtrl.create({
+      title: 'Confirm delete complaint',
+      message: 'Are you sure you want to permanently delete this?',
+      buttons: [
+          {
+              text: 'No',
+              handler: () => {
+                  console.log('Cancel clicked');
+              }
+          },
+          {
+              text: 'Yes',
+              handler: () => {
+               this.deleteComplaint(complaint_id);
+              }
+          }
+      ]
+  });
+  alert.present();
+  }
 
+
+  deleteComplaint(complaint_id){
+    this.showLoader("Deleting your complaint");
+    this.restAPI.deleteComplaint(complaint_id,this.token).then((result) => {
+      console.log("Success ->" + JSON.stringify(result));
+      this.data = result;
+      this.presentToast(this.data.data);
+      this.navCtrl.popTo(ComplaintListPage);
+      this.loading.dismiss();
+    }, (err) => {
+      
+      console.log("Error ->" + JSON.stringify(err));
+      this.presentToast(err.data);
+      this.loading.dismiss();
+      
+    });
+  }
 
 
 

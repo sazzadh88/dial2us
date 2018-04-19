@@ -17,8 +17,10 @@
 
 <ion-card *ngFor="let img of imgs">
 
-  <ion-img src="{{img}}" imageViewer></ion-img>
+  <img src="{{img}}" imageViewer>
   
 </ion-card>
-
+<ion-fab right bottom>
+  <button (click)="askDelete(complaint_id)" ion-fab color="danger"><ion-icon name="trash"></ion-icon></button>
+  </ion-fab>
 </ion-content>
