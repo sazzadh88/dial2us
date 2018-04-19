@@ -27,7 +27,7 @@ export class ComplaintListPage {
     
   }
 
-  ionViewDidLoad() {
+  ngOnInit(){
     this.showLoader();
     
     let userData = JSON.parse(localStorage.getItem('user'));
@@ -35,6 +35,10 @@ export class ComplaintListPage {
     this.token = localStorage.getItem('token');
     this.user_id = userData.id;
     this.complaintList = this.loadComplaints(this.user_id, this.token);
+  }
+
+  ionViewDidLoad() {
+    
   }
 
   showLoader(){
@@ -51,7 +55,7 @@ export class ComplaintListPage {
   
       this.loading.dismiss();
     }, (err) => {
-      console.log("Error -> " + JSON.stringify(err));
+      console.log("Error -> 12" + JSON.stringify(err));
       this.loading.dismiss();
       
     });

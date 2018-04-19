@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { RestServiceProvider } from '../../providers/rest-service/rest-service';
 import { ComplaintListPage } from '../complaint-list/complaint-list';
+// import { ComplaintListPage } from '../complaint-list/complaint-list';
+
 
 /**
  * Generated class for the ComplaintDetailsPage page.
@@ -23,8 +25,20 @@ export class ComplaintDetailsPage {
   token:any;
   data:any;
   imgs:any;
+  // loaded:boolean = false;
+  public complaintData:any;
+
+
+
+  
   constructor(public alertCtrl:AlertController,private restAPI:RestServiceProvider, public toastCtrl:ToastController, public loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
-  this.imgs = [];
+    this.imgs = [];
+    this.complaintData = {};
+    this.complaintData.complaint = '';
+    this.complaintData.date = '';
+    this.complaintData.feedback = '';
+    this.complaintData.status = '';
+
   }
 
   ionViewDidLoad() {
@@ -42,15 +56,20 @@ export class ComplaintDetailsPage {
     this.restAPI.loadComplaintDetails(this.complaint_id,this.token).then((result) => {
         this.data = result;
         this.imgs = this.data.imgs;
+        this.complaintData.complaint = this.data.data.complaint;
+        this.complaintData.status = this.data.data.status;
+        this.complaintData.feedback = this.data.data.feedback;
+        this.complaintData.date = this.data.data.created_at;
+        this.loading.dismiss();
     }, (err) => {
       
-      console.log("Error ->" + JSON.stringify(err));
+      console.log("Error -> 2" + JSON.stringify(err));
       this.presentToast("Failed");
-      // this.loading.dismiss();
+      this.loading.dismiss();
     });
     
    }
-   this.loading.dismiss();
+   
   }
   showLoader(msg){
     this.loading = this.loadingCtrl.create({
@@ -101,16 +120,17 @@ export class ComplaintDetailsPage {
 
 
   deleteComplaint(complaint_id){
-    this.showLoader("Deleting your complaint");
+    this.showLoader("Deleting complaint");
     this.restAPI.deleteComplaint(complaint_id,this.token).then((result) => {
       console.log("Success ->" + JSON.stringify(result));
       this.data = result;
       this.presentToast(this.data.data);
-      this.navCtrl.popTo(ComplaintListPage);
+      // this.navCtrl.push(ComplaintListPage);
+      this.navCtrl.push(ComplaintListPage);
       this.loading.dismiss();
     }, (err) => {
       
-      console.log("Error ->" + JSON.stringify(err));
+      console.log("Error -> 3" + JSON.stringify(err));
       this.presentToast(err.data);
       this.loading.dismiss();
       
