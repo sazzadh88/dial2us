@@ -2,9 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 import { MyApp } from './app.component';
 
@@ -48,6 +50,8 @@ import { RestServiceProvider } from '../providers/rest-service/rest-service';
     FormsModule,
     HttpClientModule,
     HttpModule,
+    IonicImageViewerModule,
+    IonicImageLoader,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

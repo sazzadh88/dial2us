@@ -6,13 +6,19 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>complaint-details</ion-title>
+  <ion-navbar color="secondary">
+    <ion-title>Complaint Details: [{{complaint_id}}]</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="card-background-page">
+
+<ion-card *ngFor="let img of imgs">
+
+  <ion-img src="{{img}}" imageViewer></ion-img>
+  
+</ion-card>
 
 </ion-content>

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, NavController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavParams, NavController, LoadingController, ToastController } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { LoginPage } from '../login/login';
-import { BillDetailsPage } from '../bill-details/bill-details';
 import { AddComplaintPage } from '../add-complaint/add-complaint';
+import { ComplaintDetailsPage } from '../complaint-details/complaint-details';
 
 /**
  * Generated class for the ComplaintListPage page.
@@ -24,7 +23,7 @@ export class ComplaintListPage {
   user_id:any;
   token:any;
   
-  constructor(private authService: AuthServiceProvider,public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
+  constructor(public toastCtrl:ToastController, private authService: AuthServiceProvider,public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     
   }
 
@@ -52,7 +51,7 @@ export class ComplaintListPage {
   
       this.loading.dismiss();
     }, (err) => {
-      this.navCtrl.setRoot(LoginPage);
+      console.log("Error -> " + JSON.stringify(err));
       this.loading.dismiss();
       
     });
@@ -63,19 +62,36 @@ export class ComplaintListPage {
     this.authService.loadComplaints(this.user_id, this.token).then((result) => {
       this.complaintList = result;
       refresher.complete();
+      this.presentToast("Data loaded");
       
     }, (err) => {
-      this.navCtrl.setRoot(LoginPage);
+      this.presentToast("Network Connection Failed");
       refresher.complete();
       
     });
   }
 
   complaintDetails(id){
-    this.navCtrl.setRoot(BillDetailsPage,{complaint_id: id});
+    this.navCtrl.push(ComplaintDetailsPage,{complaint_id: id});
   }
 
   openAddComplaint(){
     this.navCtrl.push(AddComplaintPage);
+  }
+
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+      dismissOnPageChange: false
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 }

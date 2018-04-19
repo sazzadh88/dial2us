@@ -16,6 +16,20 @@ export class RestServiceProvider {
    
   }
 
+  loadComplaintDetails(complaint_id, token){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', 'Bearer '+ token);
+      this.http.get(apiUrl+'complaintdetails/'+complaint_id, {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+  });
+  }
+
 
   uploadImageComplaint(imgData, user_id, token){
     return new Promise((resolve, reject) => {

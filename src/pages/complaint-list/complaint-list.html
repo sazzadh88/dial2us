@@ -23,7 +23,7 @@
 
  
    <ion-list *ngIf="complaintList?.length >= 1">
-    <ion-item *ngFor="let complaint of complaintList" (click)='complaintDetails(complaint.id)' >
+    <ion-item *ngFor="let complaint of complaintList" (click)='complaintDetails(complaint.id)'  detail-push>
 
           <ion-avatar item-start>
               <img src="assets/imgs/email.png">
