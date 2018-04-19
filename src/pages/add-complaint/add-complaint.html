@@ -14,25 +14,18 @@
 
 
 <ion-content padding>
-  <ion-row>
-    <ion-col col-5>
+  <button ion-button full  (click)="takePic()">
+    <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
+  </button>
 
-    </ion-col>
-      <button ion-fab color="secondary" (click)="takePic()">
-          <ion-icon name="camera"></ion-icon>
-      </button>
-   
-  </ion-row>
-  <ion-row>
-    <ion-card  [hidden]="!base64Image">
-        <img [src]='base64Image' >
-    </ion-card>
-    
-  </ion-row>
-
-  <ion-row>
-      <button ion-button color="secondary" (click)="uploadImage()">
-          <ion-icon name="cloud-upload" md="md-cloud-upload"></ion-icon>
-        </button>
-  </ion-row>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 *ngFor="let photo of photos; let id = index">
+          <ion-card class="block">
+            <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+            <img [src]="photo" *ngIf="photo" />
+          </ion-card>
+  </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>

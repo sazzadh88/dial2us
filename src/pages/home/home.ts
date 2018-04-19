@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
+import { AddComplaintPage } from '../add-complaint/add-complaint';
 
 
 @Component({
@@ -46,6 +47,10 @@ export class HomePage {
     
     // stop connect watch
     connectSubscription.unsubscribe();
+  }
+
+  navToAddComplaint(){
+    this.navCtrl.push(AddComplaintPage);
   }
 
 

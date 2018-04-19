@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { RestServiceProvider } from '../../providers/rest-service/rest-service';
 
@@ -12,16 +12,48 @@ import { RestServiceProvider } from '../../providers/rest-service/rest-service';
 })
 export class AddComplaintPage {
 
-  base64Image: string;
   token:any;
   userid:any;
   loading:any;
 
+  public photos: any;
+  public base64Image: string;
+  public fileImage: string;
+  public responseData: any;
 
-  constructor(public loadingCtrl:LoadingController, private restService: RestServiceProvider, private camera: Camera, public navCtrl: NavController, public navParams: NavParams) {
 
+  constructor(public alertCtrl:AlertController,public loadingCtrl:LoadingController, private restService: RestServiceProvider, private camera: Camera, public navCtrl: NavController, public navParams: NavParams) {
+   
 
   }
+
+  ngOnInit() {
+    this.photos = [];
+  }
+  
+  deletePhoto(index) {
+    let confirm = this.alertCtrl.create({
+      title: "Sure you want to delete this photo? There is NO undo!",
+      message: "",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Disagree clicked");
+          }
+        },
+        {
+          text: "Yes",
+          handler: () => {
+            console.log("Agree clicked");
+            this.photos.splice(index, 1);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 
   ionViewDidLoad() {
     let access_token = localStorage.getItem('token');
@@ -33,20 +65,25 @@ export class AddComplaintPage {
   takePic() {
 
     const options: CameraOptions = {
-      quality: 70,
+      quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    
-    this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64:
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-    
-    }, (err) => {
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 850,
+      targetHeight: 850,
+      saveToPhotoAlbum: false
+    };
+
+    this.camera.getPicture(options).then(
+      imageData => {
+        this.base64Image = "data:image/jpeg;base64," + imageData;
+        this.photos.push(this.base64Image);
+        this.photos.reverse();
+      },
+      err => {
         console.log(err);
-    });
+      }
+    );
 
   }
 
