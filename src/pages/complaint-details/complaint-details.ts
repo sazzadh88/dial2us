@@ -96,7 +96,7 @@ export class ComplaintDetailsPage {
 
   
   askDelete(complaint_id){
-    console.log("Ask dele called");
+    // console.log("Ask dele called");
     let alert = this.alertCtrl.create({
       title: 'Confirm delete complaint',
       message: 'Are you sure you want to permanently delete this?',
@@ -104,7 +104,7 @@ export class ComplaintDetailsPage {
           {
               text: 'No',
               handler: () => {
-                  console.log('Cancel clicked');
+                  // console.log('Cancel clicked');
               }
           },
           {
@@ -122,15 +122,14 @@ export class ComplaintDetailsPage {
   deleteComplaint(complaint_id){
     this.showLoader("Deleting complaint");
     this.restAPI.deleteComplaint(complaint_id,this.token).then((result) => {
-      console.log("Success ->" + JSON.stringify(result));
+      // console.log("Success ->" + JSON.stringify(result));
       this.data = result;
       this.presentToast(this.data.data);
-      // this.navCtrl.push(ComplaintListPage);
       this.navCtrl.push(ComplaintListPage);
       this.loading.dismiss();
     }, (err) => {
       
-      console.log("Error -> 3" + JSON.stringify(err));
+      // console.log("Error -> 3" + JSON.stringify(err));
       this.presentToast(err.data);
       this.loading.dismiss();
       
