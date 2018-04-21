@@ -3,6 +3,7 @@ import { IonicPage, NavParams, NavController, LoadingController, ToastController
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { AddComplaintPage } from '../add-complaint/add-complaint';
 import { ComplaintDetailsPage } from '../complaint-details/complaint-details';
+import { RecordComplaintPage } from '../record-complaint/record-complaint';
 
 /**
  * Generated class for the ComplaintListPage page.
@@ -100,5 +101,8 @@ export class ComplaintListPage {
   }
   navToAddComplaint(){
     this.navCtrl.push(AddComplaintPage);
+  }
+  navigateToRecordPage(){
+    this.navCtrl.push(RecordComplaintPage);
   }
 }

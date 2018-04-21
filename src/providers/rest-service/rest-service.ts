@@ -15,6 +15,19 @@ export class RestServiceProvider {
   constructor(public http: Http) {
    
   }
+  uploadAudio(file){
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      // headers.append('Content-Type', 'application/json');
+      // headers.append('Authorization', 'Bearer '+ token);
+      this.http.post(apiUrl+'record',{'file':file}, {headers: headers})
+        .subscribe(res => {
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 
   loadComplaintDetails(complaint_id, token){
     return new Promise((resolve, reject) => {

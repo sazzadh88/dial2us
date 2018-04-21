@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform ,LoadingController} from 'ionic-angular';
+import { Nav, Platform ,LoadingController, IonicPage} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
@@ -53,11 +53,20 @@ export class MyApp {
         this.rootPage = LoginPage;
       }
       // this.statusBar.styleBlackTranslucent();
+      
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.hideSplashScreen();
       
     });
   }
+
+  hideSplashScreen() {
+    if (SplashScreen) {
+      setTimeout(() => {
+        this.splashScreen.hide();
+      }, 100);
+     }
+    }
 
   openPage(page) {
     // Reset the content nav to have just this page

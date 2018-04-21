@@ -27,6 +27,11 @@ import { RegisterComplaintPage } from '../pages/register-complaint/register-comp
 import { ComplaintDetailsPage } from '../pages/complaint-details/complaint-details';
 import { AddComplaintPage } from '../pages/add-complaint/add-complaint';
 import { RestServiceProvider } from '../providers/rest-service/rest-service';
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { RecordComplaintPage } from '../pages/record-complaint/record-complaint';
+
 
 // import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
@@ -43,7 +48,8 @@ import { RestServiceProvider } from '../providers/rest-service/rest-service';
     RegisterComplaintPage,
     ComplaintDetailsPage,
     BillPage,
-    AddComplaintPage
+    AddComplaintPage,
+    RecordComplaintPage,
   ],
   imports: [
     BrowserModule,
@@ -67,12 +73,16 @@ import { RestServiceProvider } from '../providers/rest-service/rest-service';
     RegisterComplaintPage,
     ComplaintDetailsPage,
     BillPage,
-    AddComplaintPage
+    AddComplaintPage,
+    RecordComplaintPage
 
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    File,
+    Transfer,
+    FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestServiceProvider,
   ]
